@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - lts/erbium
+  - node
+
+addons:
+  chrome: stable
+
+git:
+  depth: 3
+
+branches:
+  except:
+    # do not build any branches that have *.tmp in their name
+    - /.*\.tmp$/
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+before_install: yarn global add greenkeeper-lockfile@1
+before_script: greenkeeper-lockfile-update
+after_script: greenkeeper-lockfile-upload
