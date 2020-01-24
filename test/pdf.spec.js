@@ -1,9 +1,8 @@
-import test from 'ava';
-import fs from 'fs';
-import path from 'path';
-import fileType from 'file-type';
-import render from '..';
-
+const test = require('ava');
+const fs = require('fs');
+const path = require('path');
+const fileType = require('file-type');
+const render = require('..');
 
 test('renders a buffer', async (t) => {
   const rendered = await render('<html></html>');
