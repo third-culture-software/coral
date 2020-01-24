@@ -7,14 +7,14 @@
   "license": "MIT",
   "scripts": {
     "test": "ava",
-    "release" : "release-it --disable-metrics"
+    "release": "release-it --disable-metrics"
   },
-  "release-it" : {
-    "github" : {
+  "release-it": {
+    "github": {
       "release": true
     },
-    "npm" : {
-      "release" : true
+    "npm": {
+      "release": true
     }
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "puppeteer": "2.0.0"
   },
   "devDependencies": {
-    "ava": "2.4.0",
+    "ava": "3.0.0",
     "eslint": "6.7.2",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.19.1",
