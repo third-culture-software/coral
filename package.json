@@ -27,6 +27,6 @@
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.20.1",
     "file-type": "14.1.2",
-    "release-it": "^12.4.3"
+    "release-it": "12.5.0"
   }
 }
