@@ -22,11 +22,11 @@
     "puppeteer": "2.1.1"
   },
   "devDependencies": {
-    "ava": "3.3.0",
+    "ava": "3.4.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.20.1",
     "file-type": "14.1.2",
-    "release-it": "12.5.0"
+    "release-it": "12.6.1"
   }
 }

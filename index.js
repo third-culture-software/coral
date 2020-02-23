@@ -37,7 +37,18 @@ async function render(html, options = {}) {
   const browser = await pptr.launch(pptrOptions);
   const page = await browser.newPage();
   await page.setContent(inlined.trim());
+
+  // FIXME(@jniles) - for some reason, puppeteer seems to be inconsistent on the
+  // kind of page rendering sizes, but this seems to work for making pages landscaped.
+  // See: https://github.com/puppeteer/puppeteer/issues/3834#issuecomment-549007667
+  if (opts.orientation === 'landscape') {
+    await page.addStyleTag(
+      { content: '@page { size: A4 landscape; }' },
+    );
+  }
+
   const pdf = await page.pdf(opts);
+
   await browser.close();
   return pdf;
 }
