@@ -12,7 +12,7 @@ git:
 branches:
   except:
     # do not build any branches that have *.tmp in their name
-    - /.*\.tmp$/
+    - /.*\.tmp[0-9]*$/
 
 cache:
   yarn: true
