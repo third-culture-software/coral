@@ -32,25 +32,31 @@ const DEFAULTS = {
  * @returns {Promise} a PDF of the HTML source
  */
 async function render(html, options = {}) {
-  const opts = { ...options, ...DEFAULTS };
-  const inlined = await inlineSource(html, { attribute: false, rootpath: '/', compress: false });
-  const browser = await pptr.launch(pptrOptions);
-  const page = await browser.newPage();
-  await page.setContent(inlined.trim());
+  let browser;
+  try {
+    const opts = { ...options, ...DEFAULTS };
+    const inlined = await inlineSource(html, { attribute: false, rootpath: '/', compress: false });
+    browser = await pptr.launch(pptrOptions);
+    const page = await browser.newPage();
+    await page.setContent(inlined.trim());
 
-  // FIXME(@jniles) - for some reason, puppeteer seems to be inconsistent on the
-  // kind of page rendering sizes, but this seems to work for making pages landscaped.
-  // See: https://github.com/puppeteer/puppeteer/issues/3834#issuecomment-549007667
-  if (opts.orientation === 'landscape') {
-    await page.addStyleTag(
-      { content: '@page { size: A4 landscape; }' },
-    );
+    // FIXME(@jniles) - for some reason, puppeteer seems to be inconsistent on the
+    // kind of page rendering sizes, but this seems to work for making pages landscaped.
+    // See: https://github.com/puppeteer/puppeteer/issues/3834#issuecomment-549007667
+    if (opts.orientation === 'landscape') {
+      await page.addStyleTag(
+        { content: '@page { size: A4 landscape; }' },
+      );
+    }
+
+    const pdf = await page.pdf(opts);
+
+    await browser.close();
+    return pdf;
+  } catch (e) {
+    if (browser) { browser.close(); }
+    return null;
   }
-
-  const pdf = await page.pdf(opts);
-
-  await browser.close();
-  return pdf;
 }
 
 module.exports = render;
