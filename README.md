@@ -1,8 +1,6 @@
 Coral
 ======
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/IMA-WorldHealth/coral.svg)](https://greenkeeper.io/)
-
 A PDF rendering engine based on puppeteer for IMA World Health projects, with automatic inlining
 of assets and sensible defaults.
 
