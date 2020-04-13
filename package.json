@@ -1,6 +1,6 @@
 {
   "name": "@ima-worldhealth/coral",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "PDF renderer based on puppeteer than inlines assets",
   "main": "index.js",
   "author": "jniles",
