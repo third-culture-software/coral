@@ -2,8 +2,8 @@ const pptr = require('puppeteer');
 const { inlineSource } = require('inline-source');
 
 const pptrOptions = {
-  headless: true,
-  args: [
+  headless : true,
+  args : [
     '--bwsi',
     '--disable-default-apps',
     '--disable-dev-shm-usage',
@@ -15,9 +15,9 @@ const pptrOptions = {
 };
 
 const DEFAULTS = {
-  preferCSSPageSize: true,
-  format: 'A4',
-  swallowErrors: true,
+  preferCSSPageSize : true,
+  format : 'A4',
+  swallowErrors : true,
 };
 
 /**
@@ -41,7 +41,7 @@ async function render(html, options = {}) {
     let inlined = html;
     if (!options.skipRendering) {
       inlined = await inlineSource(html, {
-        attribute: false, rootpath: '/', compress: false, swallowErrors: opts.swallowErrors,
+        attribute : false, rootpath : '/', compress : false, swallowErrors : opts.swallowErrors,
       });
     }
 
@@ -54,7 +54,7 @@ async function render(html, options = {}) {
     // See: https://github.com/puppeteer/puppeteer/issues/3834#issuecomment-549007667
     if (opts.orientation === 'landscape') {
       await page.addStyleTag(
-        { content: '@page { size: A4 landscape; }' },
+        { content : '@page { size: A4 landscape; }' },
       );
     }
 
