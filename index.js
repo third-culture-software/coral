@@ -17,6 +17,7 @@ const pptrOptions = {
 const DEFAULTS = {
   preferCSSPageSize: true,
   format: 'A4',
+  swallowErrors: true,
 };
 
 /**
@@ -39,7 +40,9 @@ async function render(html, options = {}) {
 
     let inlined = html;
     if (!options.skipRendering) {
-      inlined = await inlineSource(html, { attribute: false, rootpath: '/', compress: false });
+      inlined = await inlineSource(html, {
+        attribute: false, rootpath: '/', compress: false, swallowErrors: opts.swallowErrors,
+      });
     }
 
     browser = await pptr.launch(pptrOptions);
