@@ -35,7 +35,13 @@ async function render(html, options = {}) {
   let browser;
   try {
     const opts = { ...options, ...DEFAULTS };
-    const inlined = await inlineSource(html, { attribute: false, rootpath: '/', compress: false });
+
+
+    let inlined = html;
+    if (!options.skipRendering) {
+      inlined = await inlineSource(html, { attribute: false, rootpath: '/', compress: false });
+    }
+
     browser = await pptr.launch(pptrOptions);
     const page = await browser.newPage();
     await page.setContent(inlined.trim());
