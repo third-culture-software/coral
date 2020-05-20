@@ -8,9 +8,9 @@ const pptrOptions = {
     '--disable-default-apps',
     '--disable-dev-shm-usage',
     '--disable-setuid-sandbox',
+    '--no-sandbox',
     '--hide-scrollbars',
     '--disable-web-security',
-    '--no-sandbox',
   ],
 };
 
@@ -19,6 +19,42 @@ const DEFAULTS = {
   format : 'A4',
   swallowErrors : true,
 };
+
+let browser;
+
+/**
+ * PDF rendering is extremely resource-intensive if we do not reuse browser instances
+ * On a RPi V4, we have a 17 second startup by launching a new browser each time.  By
+ * reusing the same chromium instance, we shave that to sub-second timing.
+ */
+
+/**
+ * @function launchNewBrowser()
+ *
+ * @description
+ * Replaces the global "browser" variable with a fresh chromium instance.
+ *
+ */
+function launchNewBrowser() {
+  browser = pptr.launch(pptrOptions);
+}
+
+const hasBrowserReuseFlag = process.env.CORAL_REUSE_BROWSER;
+if (hasBrowserReuseFlag) {
+  launchNewBrowser();
+}
+
+/**
+ * @function getBrowserInstance
+ *
+ * @description
+ * Allows us to reuse browser instances as needed.
+ */
+function getBrowserInstance() {
+  return hasBrowserReuseFlag
+    ? browser
+    : pptr.launch(pptrOptions);
+}
 
 /**
  * @function render
@@ -33,10 +69,8 @@ const DEFAULTS = {
  * @returns {Promise} a PDF of the HTML source
  */
 async function render(html, options = {}) {
-  let browser;
   try {
     const opts = { ...options, ...DEFAULTS };
-
 
     let inlined = html;
     if (!options.skipRendering) {
@@ -45,7 +79,7 @@ async function render(html, options = {}) {
       });
     }
 
-    browser = await pptr.launch(pptrOptions);
+    browser = await getBrowserInstance();
     const page = await browser.newPage();
     await page.setContent(inlined.trim());
 
@@ -60,10 +94,11 @@ async function render(html, options = {}) {
 
     const pdf = await page.pdf(opts);
 
-    await browser.close();
+    await page.close();
     return pdf;
   } catch (e) {
     if (browser) { browser.close(); }
+    launchNewBrowser();
     return null;
   }
 }
