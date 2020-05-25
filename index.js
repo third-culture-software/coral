@@ -97,7 +97,7 @@ async function render(html, options = {}) {
     await page.close();
     return pdf;
   } catch (e) {
-    if (browser) { browser.close(); }
+    if (browser) { await browser.close(); }
     launchNewBrowser();
     return null;
   }
