@@ -94,10 +94,17 @@ async function render(html, options = {}) {
 
     const pdf = await page.pdf(opts);
 
+    // clean up listeners
+    page.removeAllListeners();
+
     await page.close();
     return pdf;
   } catch (e) {
-    if (browser) { await browser.close(); }
+    if (browser) {
+      browser.removeAllListeners();
+      await browser.close();
+    }
+
     launchNewBrowser();
     return null;
   }
