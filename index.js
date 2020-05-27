@@ -110,4 +110,9 @@ async function render(html, options = {}) {
   }
 }
 
+process.on('exit', async () => {
+  browser.removeAllListeners();
+  await browser.close();
+});
+
 module.exports = render;
