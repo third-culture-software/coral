@@ -1,18 +1,6 @@
-const pptr = require('puppeteer');
+const { Cluster } = require('puppeteer-cluster');
 const { inlineSource } = require('inline-source');
-
-const pptrOptions = {
-  headless : true,
-  args : [
-    '--bwsi',
-    '--disable-default-apps',
-    '--disable-dev-shm-usage',
-    '--disable-setuid-sandbox',
-    '--no-sandbox',
-    '--hide-scrollbars',
-    '--disable-web-security',
-  ],
-};
+const debug = require('debug')('imaworldhealth:coral');
 
 const DEFAULTS = {
   preferCSSPageSize : true,
@@ -20,41 +8,46 @@ const DEFAULTS = {
   swallowErrors : true,
 };
 
-let browser;
+// launch cluster
+let cluster;
 
 /**
  * PDF rendering is extremely resource-intensive if we do not reuse browser instances
  * On a RPi V4, we have a 17 second startup by launching a new browser each time.  By
  * reusing the same chromium instance, we shave that to sub-second timing.
  */
+const launch = async () => {
+  debug('setting up puppeteer cluster');
+  cluster = await Cluster.launch({
+    concurrency : Cluster.CONCURRENCY_CONTEXT, // incognito windows
+    maxConcurrency : 2,
+  });
 
-/**
- * @function launchNewBrowser()
- *
- * @description
- * Replaces the global "browser" variable with a fresh chromium instance.
- *
- */
-function launchNewBrowser() {
-  browser = pptr.launch(pptrOptions);
-}
+  debug('configuring PDF rendering task');
 
-const hasBrowserReuseFlag = process.env.CORAL_REUSE_BROWSER;
-if (hasBrowserReuseFlag) {
-  launchNewBrowser();
-}
+  await cluster.task(async ({ page, data }) => {
+    if (data.options.filename) {
+      debug(`rendering PDF w/ filename: ${data.options.filename}`);
+    }
 
-/**
- * @function getBrowserInstance
- *
- * @description
- * Allows us to reuse browser instances as needed.
- */
-function getBrowserInstance() {
-  return hasBrowserReuseFlag
-    ? browser
-    : pptr.launch(pptrOptions);
-}
+    await page.setContent(data.html.trim());
+
+    // FIXME(@jniles) - for some reason, puppeteer seems to be inconsistent on the
+    // kind of page rendering sizes, but this seems to work for making pages landscaped.
+    // See: https://github.com/puppeteer/puppeteer/issues/3834#issuecomment-549007667
+    if (data.options.orientation === 'landscape') {
+      await page.addStyleTag(
+        { content : '@page { size: A4 landscape; }' },
+      );
+    }
+
+    return page.pdf(data.options);
+  });
+
+  debug('rendering task configured');
+
+  return cluster;
+};
 
 /**
  * @function render
@@ -69,50 +62,26 @@ function getBrowserInstance() {
  * @returns {Promise} a PDF of the HTML source
  */
 async function render(html, options = {}) {
-  try {
-    const opts = { ...options, ...DEFAULTS };
+  const opts = { ...options, ...DEFAULTS };
 
-    let inlined = html;
-    if (!options.skipRendering) {
-      inlined = await inlineSource(html, {
-        attribute : false, rootpath : '/', compress : false, swallowErrors : opts.swallowErrors,
-      });
-    }
-
-    browser = await getBrowserInstance();
-    const page = await browser.newPage();
-    await page.setContent(inlined.trim());
-
-    // FIXME(@jniles) - for some reason, puppeteer seems to be inconsistent on the
-    // kind of page rendering sizes, but this seems to work for making pages landscaped.
-    // See: https://github.com/puppeteer/puppeteer/issues/3834#issuecomment-549007667
-    if (opts.orientation === 'landscape') {
-      await page.addStyleTag(
-        { content : '@page { size: A4 landscape; }' },
-      );
-    }
-
-    const pdf = await page.pdf(opts);
-
-    // clean up listeners
-    page.removeAllListeners();
-
-    await page.close();
-    return pdf;
-  } catch (e) {
-    if (browser) {
-      browser.removeAllListeners();
-      await browser.close();
-    }
-
-    launchNewBrowser();
-    return null;
+  let inlined = html;
+  if (!options.skipRendering) {
+    inlined = await inlineSource(html, {
+      attribute : false, rootpath : '/', compress : false, swallowErrors : opts.swallowErrors,
+    });
   }
+
+  if (!cluster) { cluster = await launch(); }
+
+  // make sure cluster is setup
+  const pdf = await cluster.execute({ options : opts, html : inlined });
+  return pdf;
 }
 
+// make sure cluster is terminated correctly on exit
 process.on('exit', async () => {
-  browser.removeAllListeners();
-  await browser.close();
+  await cluster.idle();
+  await cluster.close();
 });
 
 module.exports = render;

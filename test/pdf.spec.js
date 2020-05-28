@@ -19,3 +19,7 @@ test('renders a PDF buffer from an html file', async (t) => {
   const type = await fileType.fromBuffer(rendered);
   t.is(type.mime, 'application/pdf');
 });
+
+test('throws an error if no parameters are provided', async (t) => {
+  await t.throwsAsync(() => render());
+});
