@@ -17,20 +17,23 @@ let cluster;
  * reusing the same chromium instance, we shave that to sub-second timing.
  */
 const launch = async () => {
-  debug('setting up puppeteer cluster');
+  debug('#launch(): setting up puppeteer cluster');
   cluster = await Cluster.launch({
     concurrency : Cluster.CONCURRENCY_CONTEXT, // incognito windows
     maxConcurrency : 2,
   });
 
-  debug('configuring PDF rendering task');
+  debug('#launch(): configuring PDF rendering task');
 
   await cluster.task(async ({ page, data }) => {
     if (data.options.filename) {
-      debug(`rendering PDF w/ filename: ${data.options.filename}`);
+      debug(`#task(): rendering PDF w/ filename: ${data.options.filename}`);
     }
 
-    await page.setContent(data.html.trim());
+    const content = data.html.trim();
+
+    await page.setContent(content);
+    debug(`#task(): rendering content length of ${content.length}`);
 
     // FIXME(@jniles) - for some reason, puppeteer seems to be inconsistent on the
     // kind of page rendering sizes, but this seems to work for making pages landscaped.
@@ -41,10 +44,12 @@ const launch = async () => {
       );
     }
 
-    return page.pdf(data.options);
+    const pdf = await page.pdf(data.options);
+    debug('#task(): pdf rendered.');
+    return pdf;
   });
 
-  debug('rendering task configured');
+  debug('#launch(): rendering task configured');
 
   return cluster;
 };
@@ -66,6 +71,7 @@ async function render(html, options = {}) {
 
   let inlined = html;
   if (!options.skipRendering) {
+    debug('#render(): HTML render skipping is disabled.  Using inline-source to render HTML.');
     inlined = await inlineSource(html, {
       attribute : false, rootpath : '/', compress : false, swallowErrors : opts.swallowErrors,
     });
@@ -79,9 +85,14 @@ async function render(html, options = {}) {
 }
 
 // make sure cluster is terminated correctly on exit
-process.on('exit', async () => {
+process.on('beforeExit', async () => {
+  debug('cleaning up subprocesses');
   await cluster.idle();
   await cluster.close();
+  debug('successfully closed all subprocesses.');
 });
+
+// force-close all subprocesses on exit.
+process.on('exit', () => cluster.close());
 
 module.exports = render;
