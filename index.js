@@ -93,6 +93,6 @@ process.on('beforeExit', async () => {
 });
 
 // force-close all subprocesses on exit.
-process.on('exit', () => cluster.close());
+process.on('exit', () => cluster && cluster.close());
 
 module.exports = render;
