@@ -298,10 +298,12 @@ acorn@^8.0.4:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.0.5.tgz#a3bfb872a74a6a7f661bc81b9849d9cac12601b7"
   integrity sha512-v+DieK/HJkJOpFBETDJioequtc3PfxsWMaxIdIwujtF7FEV/MAyDQLlm6/zPvr7Mix07mLh6ccVwIsloceodlg==
 
-agent-base@5:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-5.1.1.tgz#e8fb3f242959db44d63be665db7a8e739537a32c"
-  integrity sha512-TMeqbNl2fMW0nMjTEPOwe3J/PRFP4vqeoNuQMG0HlMrtm5QxKqdvAkZ1pRBQ/ulIyDD5Yq0nJ7YbdD8ey0TO3g==
+agent-base@6:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
+  integrity sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==
+  dependencies:
+    debug "4"
 
 aggregate-error@^3.0.0:
   version "3.1.0"
@@ -456,7 +458,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-ava@3.15.0:
+ava@^3.15.0:
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/ava/-/ava-3.15.0.tgz#a239658ab1de8a29a243cc902e6b42e4574de2f0"
   integrity sha512-HGAnk1SHPk4Sx6plFAUkzV/XC1j9+iQhOzt4vBly18/yo0AV8Oytx7mtJd/CR8igCJ5p160N/Oo/cNJi2uSeWA==
@@ -1099,10 +1101,10 @@ deprecation@^2.0.0, deprecation@^2.3.1:
   resolved "https://registry.yarnpkg.com/deprecation/-/deprecation-2.3.1.tgz#6368cbdb40abf3373b525ac87e4a260c3a700919"
   integrity sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==
 
-devtools-protocol@0.0.818844:
-  version "0.0.818844"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.818844.tgz#d1947278ec85b53e4c8ca598f607a28fa785ba9e"
-  integrity sha512-AD1hi7iVJ8OD0aMLQU5VK0XH9LDlA1+BcPIgrAxPfaibx2DbWucuyOhc4oyQCbnvDDO68nN6/LcKfqTP343Jjg==
+devtools-protocol@0.0.847576:
+  version "0.0.847576"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.847576.tgz#2f201bfb68aa9ef4497199fbd7f5d5dfde3b200b"
+  integrity sha512-0M8kobnSQE0Jmly7Mhbeq0W/PpZfnuK+WjN2ZRVPbGqYwCHCioAVp84H0TcLimgECcN5H976y5QiXMGBC9JKmg==
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -1313,7 +1315,7 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-airbnb-base@14.2.1:
+eslint-config-airbnb-base@^14.2.1:
   version "14.2.1"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-14.2.1.tgz#8a2eb38455dc5a312550193b319cdaeef042cd1e"
   integrity sha512-GOrQyDtVEc1Xy20U7vsB2yAoB4nBlfH5HZJeatRXHleO+OS5Ot+MWij4Dpltw4/DyIkqUfqz1epfhVR5XWWQPA==
@@ -1338,7 +1340,7 @@ eslint-module-utils@^2.6.0:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-eslint-plugin-import@2.22.1:
+eslint-plugin-import@^2.22.1:
   version "2.22.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.22.1.tgz#0896c7e6a0cf44109a2d97b95903c2bb689d7702"
   integrity sha512-8K7JjINHOpH64ozkAhpT3sd+FswIZTfMZTjdx052pnWrgRCVfp8op9tbjpAk3DdUeI/Ba4C8OjdC0r90erHEOw==
@@ -1382,7 +1384,7 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
-eslint@7.19.0:
+eslint@^7.19.0:
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.19.0.tgz#6719621b196b5fad72e43387981314e5d0dc3f41"
   integrity sha512-CGlMgJY56JZ9ZSYhJuhow61lMPPjUzWmChFya71Z/jilVos7mR/jPgaEfVGgMBY5DshbKdG8Ezb8FDCHcoMEMg==
@@ -1583,7 +1585,7 @@ file-entry-cache@^6.0.0:
   dependencies:
     flat-cache "^3.0.4"
 
-file-type@16.2.0:
+file-type@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/file-type/-/file-type-16.2.0.tgz#d4f1da71ddda758db7f15f93adfaed09ce9e2715"
   integrity sha512-1Wwww3mmZCMmLjBfslCluwt2mxH80GsAXYrvPnfQ42G1EGWag336kB1iyCgyn7UXiKY3cJrNykXPrCwA7xb5Ag==
@@ -1881,12 +1883,12 @@ http2-wrapper@^1.0.0-beta.5.2:
     quick-lru "^5.1.1"
     resolve-alpn "^1.0.0"
 
-https-proxy-agent@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-4.0.0.tgz#702b71fb5520a132a66de1f67541d9e62154d82b"
-  integrity sha512-zoDhWrkR3of1l9QAL8/scJZyLu8j/gBkcwcaQOZh7Gyh/+uJQzGVETdgT30akuwkpL8HTRfssqI3BZuV18teDg==
+https-proxy-agent@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.0.tgz#e2a90542abb68a762e0a0850f6c9edadfd8506b2"
+  integrity sha512-EkYm5BcKUGiduxzSt3Eppko+PiNWNEpa4ySk9vTC6wDsQJW9rHSa+UhGNJoRYp7bz6Ht1eaRIa6QaJqO5rCFbA==
   dependencies:
-    agent-base "5"
+    agent-base "6"
     debug "4"
 
 human-signals@^1.1.1:
@@ -1999,7 +2001,7 @@ ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-inline-source@7.2.0:
+inline-source@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/inline-source/-/inline-source-7.2.0.tgz#7b0111ad56424db257f82b26f2a47a0f1b543f06"
   integrity sha512-+LXP9bhABdaxWky6r6MRuxHa93zgmdQcmYKSbWQ9yIWfEg6ebP4QCWnMebcc0EnGPAvBYWyDF7QwoKG82/0I2g==
@@ -3012,15 +3014,15 @@ puppeteer-cluster@^0.22.0:
   dependencies:
     debug "^4.1.1"
 
-puppeteer@5.5.0:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-5.5.0.tgz#331a7edd212ca06b4a556156435f58cbae08af00"
-  integrity sha512-OM8ZvTXAhfgFA7wBIIGlPQzvyEETzDjeRa4mZRCRHxYL+GNH5WAuYUQdja3rpWZvkX/JKqmuVgbsxDNsDFjMEg==
+puppeteer@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-7.0.0.tgz#be25ebf53edc1ecc09cb40af4a15f21fd1d38637"
+  integrity sha512-YNzucQMH7rKJAeISy9RB1nI72EMShlbT9vGT3E6UqElzOC4OuhFdIa3oirV4/57d/YIK5KO6qLM6UroCcyOVhw==
   dependencies:
     debug "^4.1.0"
-    devtools-protocol "0.0.818844"
+    devtools-protocol "0.0.847576"
     extract-zip "^2.0.0"
-    https-proxy-agent "^4.0.0"
+    https-proxy-agent "^5.0.0"
     node-fetch "^2.6.1"
     pkg-dir "^4.2.0"
     progress "^2.0.1"
@@ -3141,7 +3143,7 @@ registry-url@^5.0.0:
   dependencies:
     rc "^1.2.8"
 
-release-it@14.3.0:
+release-it@^14.3.0:
   version "14.3.0"
   resolved "https://registry.yarnpkg.com/release-it/-/release-it-14.3.0.tgz#2ce1cab16641d57e556de70ff68c8cad2f52e0a7"
   integrity sha512-fD0d0QG2PpJJlg51KZFdZjbRXA4jrRoJN2kkXv9m1K9jUdXhNVykexd3Eh7bLM8cNAxVUYhgSByb7mTDlAmvoA==
