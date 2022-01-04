@@ -24,7 +24,7 @@
     "puppeteer-cluster": "^0.22.0"
   },
   "devDependencies": {
-    "ava": "^3.15.0",
+    "ava": "^4.0.0",
     "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",
