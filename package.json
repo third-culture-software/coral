@@ -15,6 +15,9 @@
     },
     "npm": {
       "release": true
+    },
+    "hooks": {
+      "before:init": "yarn test"
     }
   },
   "dependencies": {
