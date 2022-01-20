@@ -18,10 +18,21 @@ let cluster;
  */
 const launch = async () => {
   debug('#launch(): setting up puppeteer cluster');
-  cluster = await Cluster.launch({
+
+  const options = {
     concurrency : Cluster.CONCURRENCY_CONTEXT, // incognito windows
     maxConcurrency : 2,
-  });
+  };
+
+  if (process.env.CHROME_OPTIONS) {
+    options.puppteerOptions = {
+      args : process.env.CHROME_OPTIONS.split(' '),
+    };
+
+    debug('#launch() using extra launch arguments:', process.env.CHROME_OPTIONS);
+  }
+
+  cluster = await Cluster.launch(options);
 
   debug('#launch(): configuring PDF rendering task');
 
