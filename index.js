@@ -25,9 +25,10 @@ const launch = async () => {
   };
 
   if (process.env.CHROME_OPTIONS) {
-    options.puppteerOptions = {
+    options.puppeteerOptions = {
       args : process.env.CHROME_OPTIONS.split(' '),
     };
+
 
     debug('#launch() using extra launch arguments:', process.env.CHROME_OPTIONS);
   }
