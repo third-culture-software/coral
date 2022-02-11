@@ -3003,12 +3003,12 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
-puppeteer-cluster@^0.22.0:
-  version "0.22.0"
-  resolved "https://registry.npmjs.org/puppeteer-cluster/-/puppeteer-cluster-0.22.0.tgz#4ab214671f414f15ad6a94a4b61ed0b4172e86e6"
-  integrity sha512-hmydtMwfVM+idFIDzS8OXetnujHGre7RY3BGL+3njy9+r8Dcu3VALkZHfuBEPf6byKssTCgzxU1BvLczifXd5w==
+puppeteer-cluster@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-cluster/-/puppeteer-cluster-0.23.0.tgz#da3f5c07de8a3069962bd9af6ee1767ba08fdbaf"
+  integrity sha512-108terIWDzPrQopmoYSPd5yDoy3FGJ2dNnoGMkGYPs6xtkdhgaECwpfZkzaRToMQPZibUOz0/dSSGgPEdXEhkQ==
   dependencies:
-    debug "^4.1.1"
+    debug "^4.3.3"
 
 puppeteer@^13.0.0:
   version "13.3.1"
