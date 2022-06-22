@@ -24,13 +24,27 @@ const launch = async () => {
     maxConcurrency : 2,
   };
 
-  if (process.env.CHROME_OPTIONS) {
-    options.puppeteerOptions = {
-      args : process.env.CHROME_OPTIONS.split(' '),
-    };
+  const puppeteerOptions = {};
 
+  if (process.env.CHROME_OPTIONS) {
+    Object.assign(puppeteerOptions, {
+      args : process.env.CHROME_OPTIONS.split(' '),
+    });
 
     debug('#launch() using extra launch arguments:', process.env.CHROME_OPTIONS);
+  }
+
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    Object.assign(puppeteerOptions, {
+      executablePath : process.env.PUPPETEER_EXECUTABLE_PATH,
+    });
+
+    debug('#launch() using exeuctable path:', process.env.PUPPETEER_EXECUTABLE_PATH);
+  }
+
+  // merge in options if they were triggered
+  if (Object.entries(puppeteerOptions).length > 0) {
+    options.puppeteerOptions = puppeteerOptions;
   }
 
   cluster = await Cluster.launch(options);
