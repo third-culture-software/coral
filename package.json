@@ -9,6 +9,9 @@
     "test": "ava",
     "release": "release-it --disable-metrics"
   },
+  "publishConfig" : {
+    "registry": "https://registry.npmjs.org"
+  },
   "release-it": {
     "github": {
       "release": true
