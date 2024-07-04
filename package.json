@@ -20,21 +20,21 @@
       "release": true
     },
     "hooks": {
-      "before:init": "yarn test"
+      "before:init": "npm test"
     }
   },
   "dependencies": {
     "debug": "^4.1.1",
     "inline-source": "^8.0.2",
-    "puppeteer": "^20.2.1",
-    "puppeteer-cluster": "^0.23.0"
+    "puppeteer": "^22.12.1",
+    "puppeteer-cluster": "^0.24.0"
   },
   "devDependencies": {
-    "ava": "^5.0.0",
+    "ava": "^5.3.1",
     "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",
     "file-type": "^16.2.0",
-    "release-it": "^15.0.0"
+    "release-it": "^17.4.1"
   }
 }
