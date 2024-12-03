@@ -24,7 +24,7 @@ const launch = async () => {
     maxConcurrency : 2,
   };
 
-  const puppeteerOptions = { headless: 'new' };
+  const puppeteerOptions = { headless : 'new' };
 
   if (process.env.CHROME_OPTIONS) {
     Object.assign(puppeteerOptions, {
