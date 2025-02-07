@@ -110,7 +110,7 @@ async function render(html, options = {}) {
   return pdf;
 }
 
-async function cleanup() {
+async function close() {
   debug('cleaning up subprocesses');
   await cluster.idle();
   await cluster.close();
@@ -119,14 +119,11 @@ async function cleanup() {
 
 // make sure cluster is terminated correctly on exit
 process.on('beforeExit', async () => {
-  try { await cleanup(); } finally { debug('Exiting') }
+  try { await close(); } finally { debug('Exiting') }
 });
 
 // force-close all subprocesses on exit.
 process.on('exit', () => cluster && cluster.close());
 
-// used in testing to close down the subprocesses
-render.close = cleanup;
-
-module.exports = render;
+module.exports = { render, close };
 
