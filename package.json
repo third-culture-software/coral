@@ -26,8 +26,8 @@
   "dependencies": {
     "debug": "^4.1.1",
     "inline-source": "^8.0.2",
-    "puppeteer": "^24.2.0",
-    "puppeteer-cluster": "^0.24.0"
+    "puppeteer": "^24.32.0",
+    "puppeteer-cluster": "^0.25.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
