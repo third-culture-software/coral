@@ -2,13 +2,13 @@ const { test } = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
-const fileType = require('file-type');
+const { fileTypeFromBuffer }= require('file-type');
 const { render, close } = require('..');
 
 test('renders a buffer', async () => {
   const rendered = await render('<html></html>');
   assert(rendered instanceof Uint8Array, 'Did not produce a Uint8Array');
-  const type = await fileType.fromBuffer(rendered);
+  const type = await fileTypeFromBuffer(rendered);
   assert.strictEqual(type.mime, 'application/pdf');
 });
 
@@ -17,7 +17,7 @@ test('renders a PDF buffer from an html file', async () => {
   const template = await fs.promises.readFile(file, 'utf8');
   const rendered = await render(template);
   assert(rendered instanceof Uint8Array, 'Did not produce a Uint8Array');
-  const type = await fileType.fromBuffer(rendered);
+  const type = await fileTypeFromBuffer(rendered);
   assert.strictEqual(type.mime, 'application/pdf');
 });
 

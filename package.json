@@ -26,14 +26,17 @@
   "dependencies": {
     "debug": "^4.1.1",
     "inline-source": "^8.0.2",
-    "puppeteer": "^24.43.1",
+    "puppeteer": "^25.2.1",
     "puppeteer-cluster": "^0.25.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.3.0",
-    "file-type": "^16.2.0",
+    "file-type": "^22.0.1",
     "globals": "^17.6.0",
     "release-it": "^20.0.1"
+  },
+  "allowScripts": {
+    "puppeteer@25.2.1": true
   }
 }
