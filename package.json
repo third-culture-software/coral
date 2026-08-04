@@ -34,9 +34,6 @@
     "eslint": "^10.3.0",
     "file-type": "^22.0.1",
     "globals": "^17.6.0",
-    "release-it": "^20.0.1"
-  },
-  "allowScripts": {
-    "puppeteer@25.2.1": true
+    "release-it": "^21.0.1"
   }
 }
