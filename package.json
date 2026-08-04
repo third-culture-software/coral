@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "node --test test/pdf.test.js",
-    "release": "release-it --disable-metrics"
+    "release": "release-it "
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
