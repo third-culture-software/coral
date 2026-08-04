@@ -111,10 +111,12 @@ async function render(html, options = {}) {
 }
 
 async function close() {
-  debug('cleaning up subprocesses');
-  await cluster.idle();
-  await cluster.close();
-  debug('successfully closed all subprocesses.');
+  if (cluster) {
+    debug('cleaning up subprocesses');
+    await cluster.idle();
+    await cluster.close();
+    debug('successfully closed all subprocesses.');
+  }
 }
 
 // make sure cluster is terminated correctly on exit
@@ -126,4 +128,3 @@ process.on('beforeExit', async () => {
 process.on('exit', () => cluster && cluster.close());
 
 module.exports = { render, close };
-
