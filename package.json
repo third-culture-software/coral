@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "test": "node --test test/pdf.test.js",
-    "release": "release-it "
+    "release": "release-it ",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -30,10 +32,9 @@
     "puppeteer-cluster": "^0.25.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.3.0",
     "file-type": "^22.0.1",
     "globals": "^17.6.0",
+    "oxlint": "^1.94.0",
     "release-it": "^21.0.1"
   }
 }
